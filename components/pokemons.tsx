@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
-import { createClient } from '@supabase/supabase-js'
+// import { createClient } from '@supabase/supabase-js'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from "@/components/ui/button"
-// import { useMotionValue } from "framer-motion";
-// import { MouseEvent } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -20,9 +21,9 @@ import HyperText from './magicui/hyper-text'
 import { User as SupabaseUser } from '@supabase/supabase-js'
 // import { Card3dBody, Card3dContainer, Card3dItem } from './ui/3d-card'
 // Initialize Supabase client
-const supabase = createClient(`${process.env.NEXT_PUBLIC_SUPABASE_URL}`, `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`)
+// const supabase = createClient(`${process.env.NEXT_PUBLIC_SUPABASE_URL}`, `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`)
 
-
+const supabase = createClientComponentClient()
 
 
 
@@ -96,13 +97,11 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
 
     if (favorites.length >= 10) {
       console.error('Maximum number of favorites reached')
+      toast.error('Maximum number of favorites reached')
       return
     }
 
-    if (favorites.some(fav => fav.number === pokemon.number)) {
-      console.error('Pokemon already in favorites')
-      return
-    }
+
 
     try {
       const { data, error } = await supabase
@@ -190,20 +189,24 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       console.error('Error logging in:', error.message)
+      toast.error(`Error logging in: ${error.message}`)
     } else {
       setIsLoginModalOpen(false)
+      toast.success('Login successful!')
     }
   }
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const { error } = await supabase.auth.signUp({ email, password })
+    e.preventDefault();
+    const { error } = await supabase.auth.signUp({ email, password });
     if (error) {
-      console.error('Error signing up:', error.message)
+      console.error('Error signing up:', error.message);
+      toast.error(`Error signing up: ${error.message}`);
     } else {
-      setIsLoginModalOpen(false)
+      setIsLoginModalOpen(false);
+      toast.success('Signup successful! Please check your email for confirmation.');
     }
-  }
+  };
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
