@@ -4,9 +4,9 @@ import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import { createClient } from '@supabase/supabase-js'
 import { Button } from "@/components/ui/button"
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+// import { useMotionValue } from "framer-motion";
+// import { MouseEvent } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -17,17 +17,14 @@ import { Label } from "@/components/ui/label"
 import { Heart, X, ChevronLeft, ChevronRight, MoreHorizontal, LogIn, LogOut } from "lucide-react"
 import { Pokemon, PokemonRegion, PokemonType } from '@/lib/types'
 import HyperText from './magicui/hyper-text'
+import { User as SupabaseUser } from '@supabase/supabase-js'
 // import { Card3dBody, Card3dContainer, Card3dItem } from './ui/3d-card'
 // Initialize Supabase client
 const supabase = createClient(`${process.env.NEXT_PUBLIC_SUPABASE_URL}`, `${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`)
 
-interface User {
-  id?: string
-  email?: string
-  user_metadata?: {
-    avatar_url: string
-  }
-}
+
+
+
 
 export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokemons: Pokemon[], pokemonTypes: PokemonType[], pokemonRegions: PokemonRegion[] }) {
   const [favorites, setFavorites] = useState<Pokemon[]>([])
@@ -36,7 +33,7 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<SupabaseUser | null>(null)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isLoginView, setIsLoginView] = useState(true)
   const [email, setEmail] = useState('')
@@ -44,7 +41,7 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null)
+      setUser(session?.user ? session.user : null)
       if (session?.user) {
         await fetchFavorites(session.user.id)
       } else {
@@ -62,6 +59,7 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
         .channel('favorites')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'favorites' }, payload => {
           fetchFavorites(user.id)
+          console.log(payload)
         })
         .subscribe()
 
@@ -211,19 +209,19 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
     await supabase.auth.signOut()
   }
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  // const mouseX = useMotionValue(0);
+  // const mouseY = useMotionValue(0);
 
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
+  // function handleMouseMove({
+  //   currentTarget,
+  //   clientX,
+  //   clientY,
+  // }: MouseEvent) {
+  //   const { left, top } = currentTarget.getBoundingClientRect();
 
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
+  //   mouseX.set(clientX - left);
+  //   mouseY.set(clientY - top);
+  // }
 
   return (
     <div className="container mx-auto p-4">
@@ -277,7 +275,7 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
                         </TableBody>
                       </Table>
                     ) : (
-                      <p>You haven't added any favorite Pokémon yet.</p>
+                      <p>You have not added any favorite Pokémon yet.</p>
                     )}
                   </div>
                 </SheetContent>
