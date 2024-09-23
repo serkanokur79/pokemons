@@ -210,6 +210,7 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
+    toast.success('Logout successful!')
   }
 
   // const mouseX = useMotionValue(0);
