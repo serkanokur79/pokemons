@@ -547,19 +547,18 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: { pokem
                   <p>Type: {pokemon?.type?.join(', ')}</p>
                   <p>Region: {pokemon.region}</p>
                 </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => favorites.some(fav => fav.number === pokemon.number) ? removeFavorite(pokemon) : addFavorite(pokemon)}
-                  title={favorites.some(fav => fav.number === pokemon.number) ? "Remove from favorites" : "Add to favorites"}
-                  // disabled={favorites.some(fav => fav.number === pokemon.number) || favorites.length >= 5}
-                  className='group/but group-hover:mt-4 mt-3 '
-                >
-                  <Heart className={`h-4 w-4 group-hover/but:w-5 group-hover/but:h-5 ${favorites.some(fav => fav.number === pokemon.number) ? 'fill-red-600 text-red-800' : ''}`} />
-                </Button>
-
-
-
+                <div>
+                  {user ? <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => favorites.some(fav => fav.number === pokemon.number) ? removeFavorite(pokemon) : addFavorite(pokemon)}
+                    title={favorites.some(fav => fav.number === pokemon.number) ? "Remove from favorites" : "Add to favorites"}
+                    // disabled={favorites.some(fav => fav.number === pokemon.number) || favorites.length >= 5}
+                    className='group/but group-hover:mt-4 mt-3 '
+                  >
+                    <Heart className={`h-4 w-4 group-hover/but:w-5 group-hover/but:h-5 ${favorites.some(fav => fav.number === pokemon.number) ? 'fill-red-600 text-red-800' : ''}`} />
+                  </Button> : null}
+                </div>
               </div>
 
             </CardContent>
