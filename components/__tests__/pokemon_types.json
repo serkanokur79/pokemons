@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Normal",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/normal.png"
+    },
+    {
+        "name": "Fire",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/fire.png"
+    },
+    {
+        "name": "Water",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/water.png"
+    },
+    {
+        "name": "Grass",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/grass.png"
+    },
+    {
+        "name": "Electric",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/electric.png"
+    },
+    {
+        "name": "Ice",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/ice.png"
+    },
+    {
+        "name": "Fighting",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/fighting.png"
+    },
+    {
+        "name": "Poison",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/poison.png"
+    },
+    {
+        "name": "Ground",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/ground.png"
+    },
+    {
+        "name": "Flying",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/flying.png"
+    },
+    {
+        "name": "Psychic",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/psychic.png"
+    },
+    {
+        "name": "Bug",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/bug.png"
+    },
+    {
+        "name": "Rock",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/rock.png"
+    },
+    {
+        "name": "Ghost",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/ghost.png"
+    },
+    {
+        "name": "Dragon",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/dragon.png"
+    },
+    {
+        "name": "Dark",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/dark.png"
+    },
+    {
+        "name": "Steel",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/steel.png"
+    },
+    {
+        "name": "Fairy",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/fairy.png"
+    }
+]
