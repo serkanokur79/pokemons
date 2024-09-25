@@ -5,6 +5,14 @@ SO Pokemons
 
 This project is a simple web application that allows users to search for Pokémon, view their details, and add them to their favorites list. It  provides a responsive design for both desktop and mobile devices.
 
+## Technologies Used
+
+- Next.js
+- Tailwind CSS
+- Shadcn/UI
+- Supabase
+
+
 ## Features
 
 - Filter Pokémon by type and region
