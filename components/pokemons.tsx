@@ -274,7 +274,6 @@ export function PokemonsPage({ pokemons, pokemonTypes, pokemonRegions }: Pokemon
             <div className="flex items-center space-x-2">
               <Label htmlFor="filter-by-region">Filter by region</Label>
               <Select
-                id="filter-by-region"
                 value={selectedRegion || "all"}
                 onValueChange={(value) => {
                   setSelectedRegion(value === "all" ? null : value);
